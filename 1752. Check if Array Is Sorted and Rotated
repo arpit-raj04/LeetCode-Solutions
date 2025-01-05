@@ -1,0 +1,24 @@
+class Solution {
+public:
+    bool check(vector<int>& nums) {
+        char c='f';
+        int n = nums.size();
+        int rcount=-1;
+        for(int i =0; i<(nums.size()); i++){
+            if(nums[i]>nums[(i+1)%n]){
+                if(rcount!=-1){
+                    return false;
+                }
+                rcount = i+1;
+                }
+        }   
+        for(int i=0;i<n-1 ; i++){
+        int current = (rcount + i) % n;
+        int next = (current + 1) % n;
+        if (nums[current] > nums[next]) {
+            return false;
+        }
+        }
+    return true;
+    }
+};
