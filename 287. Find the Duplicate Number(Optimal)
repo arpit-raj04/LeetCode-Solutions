@@ -1,0 +1,22 @@
+TORTOISE _ HARE _ ALGORITHM:(Optimal approach)
+
+public:
+    int findDuplicate(vector<int>& nums) {
+        int n=nums.size();
+        int tortoise=nums[0];
+        int hare=nums[0];
+        do{
+            tortoise = nums[tortoise]; //Moved 1 step
+            hare = nums[nums[hare]];  //Moved @2 steps
+        }while(hare!=tortoise);  //Cycle of repetition detected
+
+
+        //Findin the entrrance of cycle
+        tortoise = nums[0];
+        while(tortoise != hare){
+            tortoise = nums[tortoise];  //Single step mov.
+            hare = nums[hare];  //Sing;le step mov.
+        }
+        return hare;  //Duplicate no.
+        // return 0; 
+    }
