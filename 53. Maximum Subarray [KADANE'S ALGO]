@@ -9,3 +9,19 @@ int maxSubArray(vector<int>& nums) {
     }
     return maxi;
 }
+
+
+// OPTIMAL:
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int maxi=nums[0];
+        int sum=0;
+        for(auto it: nums){
+            sum = max(it, sum+it);
+            maxi = max(maxi, sum);
+                    }
+        return maxi;
+    }
+};
