@@ -1,0 +1,39 @@
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>> result;
+        sort(nums.begin(), nums.end()); // Sort the array
+
+        for (int x = 0; x < nums.size(); x++) {
+            if (x > 0 && nums[x] == nums[x - 1]) continue; // Skip duplicate numbers
+
+            int left = x + 1;
+            int right = nums.size() - 1;
+            int a = nums[x];
+
+            while (left < right) {
+                int sum = nums[left] + nums[right];
+
+                if (sum == -a) {
+                    result.push_back({nums[x], nums[left], nums[right]});
+
+                    // Move left and skip duplicates
+                    while (left < right && nums[left] == nums[left + 1]) left++;
+                    // Move right and skip duplicates
+                    while (left < right && nums[right] == nums[right - 1]) right--;
+
+                    // Move both pointers to search for next triplet
+                    left++;
+                    right--;
+                } 
+                else if (sum < -a) {
+                    left++; // Increase sum by moving left pointer
+                } 
+                else {
+                    right--; // Decrease sum by moving right pointer
+                }
+            }
+        }
+        return result;
+    }
+};
