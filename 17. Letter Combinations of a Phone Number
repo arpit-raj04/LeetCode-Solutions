@@ -1,0 +1,38 @@
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+
+using namespace std;
+
+class Solution {
+public:
+    vector<string> letterCombinations(string digits) {
+        if (digits.empty()) return {}; 
+
+        unordered_map<char, string> keypad = {
+            {'2', "abc"}, {'3', "def"}, {'4', "ghi"}, {'5', "jkl"}, 
+            {'6', "mno"}, {'7', "pqrs"}, {'8', "tuv"}, {'9', "wxyz"}
+        };
+
+        vector<string> result;
+        string current = "";
+
+        backtrack(0, digits, current, result, keypad);
+        return result;
+    }
+
+private:
+    void backtrack(int index, string& digits, string& current, vector<string>& result, unordered_map<char, string>& keypad) {
+        if (index == digits.size()) {
+            result.push_back(current);
+            return;
+        }
+
+        string letters = keypad[digits[index]];
+        for (char ch : letters) {
+            current.push_back(ch);
+            backtrack(index + 1, digits, current, result, keypad);
+            current.pop_back(); 
+        }
+    }
+};
