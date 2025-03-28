@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int romanToInt(string s) {
+        map<char, int> RtoI;
+        RtoI.insert({'I',1});
+        RtoI.insert({'V',5});
+        RtoI.insert({'X',10});
+        RtoI.insert({'L',50});
+        RtoI.insert({'C',100});
+        RtoI.insert({'M',1000});
+        RtoI.insert({'D',500});
+    int sum=RtoI[s.back()];
+    for(int i=s.size()-2;i>=0;i--){
+        if(RtoI[s[i]]<RtoI[s[i+1]]){
+            sum -= RtoI[s[i]];
+        }
+        else{
+            sum += RtoI[s[i]];
+        }
+    }
+    return sum;
+
+    }
+};
