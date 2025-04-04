@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> valid;
+        for(char c: s){
+            if(c=='('||c=='{'||c=='['){
+                valid.push(c);
+            }
+            else{
+            if(valid.empty()) return false;
+                char top = valid.top();
+                valid.pop();
+                   if((c==')' && top!='(')
+                    || (c==']' && top!='[')
+                    || c=='}' && top!= '{'){
+                        return false;
+                
+            }}
+    }
+    return valid.empty();
+    }
+};
