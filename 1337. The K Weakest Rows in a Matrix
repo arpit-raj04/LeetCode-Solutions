@@ -1,0 +1,31 @@
+class Solution {
+public:
+    vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {
+        map<int, int> weak;
+        vector<int> result;
+
+      
+        for (int i = 0; i < mat.size(); i++) {
+            int soldiers = 0;
+            for (int j = 0; j < mat[0].size(); j++) {
+                if (mat[i][j] == 1) soldiers += 1;
+            }
+            weak.emplace(i, soldiers); 
+        }
+
+        // Convert map to vector for sorting by values
+        vector<pair<int, int>> res(weak.begin(), weak.end());
+
+        
+        sort(res.begin(), res.end(), [](const pair<int, int>& a, const pair<int, int>& b) {
+            if (a.second == b.second) return a.first < b.first;  // break ties by row index
+            return a.second < b.second;  // sort by soldier count
+        });
+
+        for (int i = 0; i < k; i++) {
+            result.push_back(res[i].first);
+        }
+
+        return result;
+    }
+};
