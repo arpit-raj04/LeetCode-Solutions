@@ -1,0 +1,12 @@
+class Solution {
+public:
+    int countNegatives(vector<vector<int>>& grid) {
+        int count=0;
+        for(const vector<int>& c : grid){
+            for(int f: c){
+                if(f<0) count++;
+            }
+        }
+        return count;
+    }
+};
