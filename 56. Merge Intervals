@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        vector<vector<int>> result;
+        map<int, int> mpp;
+
+        // Store intervals in a sorted map
+        for (auto& n : intervals) {
+            mpp[n[0]] = max(mpp[n[0]], n[1]);  // handles duplicate starts
+        }
+
+        auto it = mpp.begin();
+        int start = it->first;
+        int end = it->second;
+        ++it;  
+
+        for (; it != mpp.end(); ++it) {
+            if (it->first <= end) {
+                end = max(end, it->second);
+            } else {
+                result.push_back({start, end});
+                start = it->first;
+                end = it->second;
+            }
+        }
+
+        result.push_back({start, end});
+        return result;
+    }
+};
