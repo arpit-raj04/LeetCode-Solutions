@@ -1,0 +1,14 @@
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if(x<0 || x%10==0 && x!=0) return false;
+        int HalfRev=0;
+        int y=x;
+        while(x>HalfRev){
+            int digit = x%10;
+           HalfRev = HalfRev*10 +digit;
+            x = x/10;
+        }
+        return (x== HalfRev || x==HalfRev/10);
+    }
+};
