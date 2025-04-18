@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        int n = nums.size();
+        int cur_pdt = nums[0];
+        int cur_min = nums[0]; //Bcz we neeed track of min. nos. cause in case of -*- the max approach just take the +ve but, but actually when 2 -ves multipy they can give a larger +ve product.
+        int max_pdt = nums[0];
+        for(int i=1;i<n;i++){
+            if(nums[i]<0) swap(cur_min,cur_pdt);// Swap because multiplying by a negative flips sign
+            cur_pdt = max(nums[i],cur_pdt*nums[i]);
+            cur_min = min(nums[i],cur_min*nums[i]);
+            max_pdt = max(max_pdt,cur_pdt);
+        }
+        return max_pdt;
+    }
+    
+};
